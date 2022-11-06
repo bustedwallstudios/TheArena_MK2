@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/img/innerShape.png" type="Texture" id=1]
+[ext_resource path="res://assets/img/arenaShape.png" type="Texture" id=2]
+[ext_resource path="res://resources/GlowEnv.tres" type="Environment" id=3]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends StaticBody2D
+
+export (float, 0, 1) var hue = 0
+
+export (Vector2) var rectScale = Vector2(1, 1)
+
+func _ready():
+	$Background.modulate = Color.from_hsv(hue, 1, 1, 0.1*255)
+	
+	$Background.rect_size *= rectScale
+	$Foreground.rect_size *= rectScale
+	
+#	$Hitbox.shape.extents *= rectScale
+#	$Hitbox.position *= rectScale
+"
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 60, 60 )
+
+[node name="Block" type="StaticBody2D"]
+scale = Vector2( 0.5, 0.5 )
+script = SubResource( 2 )
+
+[node name="Env" type="WorldEnvironment" parent="."]
+environment = ExtResource( 3 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2( 60, 60 )
+z_index = -2
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="Background" type="NinePatchRect" parent="."]
+margin_right = 80.0
+margin_bottom = 80.0
+texture = ExtResource( 2 )
+patch_margin_left = 60
+patch_margin_top = 60
+patch_margin_right = 60
+patch_margin_bottom = 60
+
+[node name="Foreground" type="NinePatchRect" parent="."]
+margin_right = 120.0
+margin_bottom = 120.0
+texture = ExtResource( 1 )
+patch_margin_left = 60
+patch_margin_top = 60
+patch_margin_right = 60
+patch_margin_bottom = 60
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

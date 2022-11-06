@@ -1,0 +1,106 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scenes/Ball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/img/backgroundTiling.png" type="Texture" id=2]
+[ext_resource path="res://scenes/MobileJoystick.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/hazards/Axe.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resources/GlowEnv.tres" type="Environment" id=5]
+[ext_resource path="res://assets/img/arenaShape.png" type="Texture" id=6]
+[ext_resource path="res://script/world.gd" type="Script" id=7]
+[ext_resource path="res://script/hazardManager.gd" type="Script" id=8]
+[ext_resource path="res://scenes/hazards/Beam.tscn" type="PackedScene" id=9]
+[ext_resource path="res://script/utilities/shake.gd" type="Script" id=10]
+[ext_resource path="res://assets/font/Quantum.otf" type="DynamicFontData" id=11]
+[ext_resource path="res://script/scoreText.gd" type="Script" id=12]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0, 0.0851064, 0, 0.0851064, 0, 1, 0, 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 11 )
+
+[node name="World" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+script = ExtResource( 10 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 5 )
+
+[node name="Background" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2( 0.5, 0.5 )
+
+[node name="BGSprite" type="Sprite" parent="Background/ParallaxLayer"]
+position = Vector2( 640, 360 )
+z_index = -999
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1280, 720 )
+
+[node name="Arena" type="NinePatchRect" parent="."]
+modulate = Color( 72.83, 1, 1, 1 )
+margin_left = 390.0
+margin_top = 110.0
+margin_right = 1390.0
+margin_bottom = 1110.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+patch_margin_left = 100
+patch_margin_top = 100
+patch_margin_right = 100
+patch_margin_bottom = 100
+
+[node name="Trail" type="Line2D" parent="."]
+points = PoolVector2Array( 56, -129, 86, -150, 119, -160, 132, -142, 146, -124, 163, -99, 205, -101, 250, -125, 283.937, -141.969, 310, -155, 336, -166, 371, -143, 389, -105, 402, -67, 415, -17 )
+width = 40.0
+default_color = Color( 0.4, 0.501961, 1, 1 )
+gradient = SubResource( 2 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 640, 360 )
+
+[node name="Joystick" parent="." instance=ExtResource( 3 )]
+modulate = Color( 1, 100, 1, 1 )
+position = Vector2( 990, 462 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="HazardManager" type="Node2D" parent="."]
+script = ExtResource( 8 )
+AxeScene = ExtResource( 4 )
+BeamScene = ExtResource( 9 )
+
+[node name="HazardTimer" type="Timer" parent="HazardManager"]
+wait_time = 4.0
+autostart = true
+
+[node name="UI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="ScoreText" type="Label" parent="UI"]
+modulate = Color( 1, 1, 100, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -640.0
+margin_right = 640.0
+margin_bottom = 110.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
+valign = 1
+script = ExtResource( 12 )
+
+[connection signal="area_entered" from="Player" to="Player" method="collision"]
+[connection signal="useMoveVector" from="Joystick" to="Player" method="move"]
+[connection signal="timeout" from="HazardManager/HazardTimer" to="HazardManager" method="beginRandomHazard"]
