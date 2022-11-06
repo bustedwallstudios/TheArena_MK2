@@ -101,7 +101,8 @@ func die():
 	
 	get_parent().get_node("Camera").shake(2, 80, 7.5)
 	
-	# delay the changing of scenes for the camera shake to complete
+	# Delay the changing of scenes for the camera shake to complete
 	yield(get_tree().create_timer(3), "timeout")
-	# change the scene to the main menu because user died 
-	get_tree().change_scene("res://scenes/MainMenu.tscn")
+	
+	# Change the scene to the main menu because user died 
+	get_tree().change_scene("res://scenes/ui/MainMenu.tscn")

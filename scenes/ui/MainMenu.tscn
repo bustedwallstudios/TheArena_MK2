@@ -1,13 +1,25 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://resources/TitleFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://resources/GlowEnv.tres" type="Environment" id=2]
 [ext_resource path="res://assets/font/Quantum.otf" type="DynamicFontData" id=3]
-[ext_resource path="res://script/ui/mainMenu.gd" type="Script" id=4]
-[ext_resource path="res://script/utilities/ui/SwoopControl.gd" type="Script" id=5]
+[ext_resource path="res://script/utilities/swoop/swoopNode2D.gd" type="Script" id=4]
+[ext_resource path="res://script/utilities/swoop/swoopControl.gd" type="Script" id=5]
 [ext_resource path="res://assets/img/balls/ball.png" type="Texture" id=6]
 [ext_resource path="res://assets/img/buttonOutline.png" type="Texture" id=7]
 [ext_resource path="res://scenes/ui/IconSelectScreen.tscn" type="PackedScene" id=8]
+[ext_resource path="res://script/ui/mainMenu.gd" type="Script" id=9]
+
+[sub_resource type="DynamicFont" id=5]
+size = 36
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 36
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 182
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 70
@@ -28,23 +40,54 @@ font_data = ExtResource( 3 )
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 9 )
+
+[node name="FocusCamera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
 script = ExtResource( 4 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 2 )
 
-[node name="Title" type="Label" parent="." groups=["swoop"]]
+[node name="HighScore" type="Label" parent="." groups=["swoop"]]
 modulate = Color( 1, 1, 100, 1 )
 anchor_right = 1.0
-margin_bottom = 200.0
+margin_left = 898.0
+margin_top = 363.0
+margin_right = -95.0
+margin_bottom = 553.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = SubResource( 5 )
+text = "LAST SCORE"
+align = 1
+script = ExtResource( 5 )
+
+[node name="Score" type="Label" parent="HighScore"]
+modulate = Color( 1, 1, 100, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_top = -31.5
+margin_bottom = 31.5
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="Title" type="Label" parent="."]
+modulate = Color( 1, 1, 100, 1 )
+anchor_right = 1.0
+margin_bottom = 240.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 1 )
 text = "The Arena"
 align = 1
 valign = 1
 script = ExtResource( 5 )
 
-[node name="PlayButton" type="TextureButton" parent="." groups=["swoop"]]
+[node name="PlayButton" type="TextureButton" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -77,7 +120,7 @@ text = "Play"
 align = 1
 valign = 1
 
-[node name="ChangeIconButton" type="TextureButton" parent="." groups=["swoop"]]
+[node name="ChangeIconButton" type="TextureButton" parent="."]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 198.0

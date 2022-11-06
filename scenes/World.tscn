@@ -2,16 +2,16 @@
 
 [ext_resource path="res://scenes/Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/img/backgroundTiling.png" type="Texture" id=2]
-[ext_resource path="res://scenes/MobileJoystick.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/ui/MobileJoystick.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/hazards/Axe.tscn" type="PackedScene" id=4]
 [ext_resource path="res://resources/GlowEnv.tres" type="Environment" id=5]
 [ext_resource path="res://assets/img/arenaShape.png" type="Texture" id=6]
 [ext_resource path="res://script/world.gd" type="Script" id=7]
-[ext_resource path="res://script/hazardManager.gd" type="Script" id=8]
+[ext_resource path="res://script/hazards/_hazardManager.gd" type="Script" id=8]
 [ext_resource path="res://scenes/hazards/Beam.tscn" type="PackedScene" id=9]
 [ext_resource path="res://script/utilities/shake.gd" type="Script" id=10]
 [ext_resource path="res://assets/font/Quantum.otf" type="DynamicFontData" id=11]
-[ext_resource path="res://script/scoreText.gd" type="Script" id=12]
+[ext_resource path="res://script/ui/scoreText.gd" type="Script" id=12]
 
 [sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 0, 0.0851064, 0, 0.0851064, 0, 1, 0, 1 )
