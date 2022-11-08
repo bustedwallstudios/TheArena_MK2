@@ -21,8 +21,11 @@ func beginRandomHazard():
 	# deal with fancy shit)
 	self.get_parent().get_node("UI/ScoreText").updateText(str(hazardsSurvived))
 	
-	# ADD TO GLOBAL SCORE FOR USE ON MAIN MENU
-	Global.lastScore = hazardsSurvived
+	# If this score is a new record, save it as a highscore
+	var prevHighScore = Global.data["highScore"]
+	if hazardsSurvived > prevHighScore:
+		print("new high score! ////////////////////////")
+		Global.data["highScore"] = hazardsSurvived
 	
 	# Update the timer, so that the more hazards that have spawned, the faster
 	# new hazards will come
@@ -32,7 +35,7 @@ func beginRandomHazard():
 	if !continueHazards:
 		return
 	
-	print("Spawning random hazard...")
+	#print("Spawning random hazard...")
 	
 	# A random disaster name in disasters[]
 	var currentHazard = allHazards[floor(rand_range(0, len(allHazards)))]
@@ -44,7 +47,7 @@ func beginRandomHazard():
 	hazardsSurvived += 1
 
 func axe():
-	print("Spawning Axe...")
+	#print("Spawning Axe...")
 	
 	# Create an axe...
 	var axe = AxeScene.instance()
@@ -56,7 +59,7 @@ func axe():
 	axe.run(hazardsSurvived)
 
 func beam():
-	print("Spawning Beam...")
+	#print("Spawning Beam...")
 	
 	# Create a beam...
 	var beam = BeamScene.instance()

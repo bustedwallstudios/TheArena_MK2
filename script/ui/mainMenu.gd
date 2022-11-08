@@ -12,8 +12,8 @@ func _ready():
 	$ChangeIconButton.swoop(Vector2($ChangeIconButton.rect_position.x, 720+300), $ChangeIconButton.rect_position, swoopSpeed)
 	$HighScore.swoop(Vector2($HighScore.rect_position.x, -300), $HighScore.rect_position, swoopSpeed)
 	
-	# Update the score text upon loading the main menu
-	$HighScore/Score.set_text(str(Global.lastScore))
+	# Set the high score text TO the high score
+	$HighScore/Score.set_text(str(Global.data["highScore"]))
 
 func startGame():
 	get_tree().change_scene("res://scenes/World.tscn")
