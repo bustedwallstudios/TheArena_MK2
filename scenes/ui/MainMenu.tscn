@@ -14,7 +14,7 @@ size = 36
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=6]
-size = 36
+size = 64
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=1]
@@ -51,7 +51,7 @@ script = ExtResource( 4 )
 environment = ExtResource( 2 )
 
 [node name="HighScore" type="Label" parent="." groups=["swoop"]]
-modulate = Color( 1, 1, 100, 1 )
+self_modulate = Color( 1, 1, 100, 1 )
 anchor_right = 1.0
 margin_left = 898.0
 margin_top = 363.0
@@ -59,22 +59,19 @@ margin_right = -95.0
 margin_bottom = 553.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 5 )
-text = "LAST SCORE"
+text = "HIGH SCORE"
 align = 1
 script = ExtResource( 5 )
 
 [node name="Score" type="Label" parent="HighScore"]
-modulate = Color( 1, 1, 100, 1 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_top = -31.5
-margin_bottom = 31.5
+self_modulate = Color( 1, 3.5, 100, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 56.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 6 )
+text = "9"
 align = 1
-valign = 1
 
 [node name="Title" type="Label" parent="."]
 modulate = Color( 1, 1, 100, 1 )
@@ -128,9 +125,6 @@ margin_top = -39.0
 margin_right = 318.0
 margin_bottom = 153.0
 script = ExtResource( 5 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Indicator" type="AnimatedSprite" parent="ChangeIconButton"]
 modulate = Color( 1, 3.5, 100, 1 )
@@ -143,11 +137,13 @@ animation = "Ball"
 modulate = Color( 1, 1, 100, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -15.0
 margin_top = 20.0
+margin_right = 13.0
 custom_constants/line_spacing = -5
 custom_fonts/font = SubResource( 3 )
-text = "Change
-Ball"
+text = "CHANGE
+BALL"
 align = 1
 
 [node name="IconSelectScreen" parent="." instance=ExtResource( 8 )]
